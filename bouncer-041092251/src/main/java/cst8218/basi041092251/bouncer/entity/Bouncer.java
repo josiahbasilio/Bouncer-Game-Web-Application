@@ -87,6 +87,30 @@ public class Bouncer implements Serializable {
         }
     }
     
+    public void updateFrom(Bouncer newBouncer) {
+        if (newBouncer.getX() != null) {
+            this.x = newBouncer.getX();
+        }
+        if (newBouncer.getY() != null) {
+            this.y = newBouncer.getY();
+        }
+        if (newBouncer.getSize() > 0) { 
+            this.size = newBouncer.getSize();
+        }
+        if (newBouncer.getMaxTravel() > 0) { 
+            this.maxTravel = newBouncer.getMaxTravel();
+        }
+        if (newBouncer.getCurrentTravel() != 0) { 
+            this.currentTravel = newBouncer.getCurrentTravel();
+        }
+        if (newBouncer.getMvtDirection() != 0) { 
+            this.mvtDirection = newBouncer.getMvtDirection();
+        }
+        if (newBouncer.getDirChangeCount() >= 0) { 
+            this.dirChangeCount = newBouncer.getDirChangeCount();
+        }
+    }
+    
     // Getters and Setters
     public Long getId() {
         return id;
@@ -135,6 +159,21 @@ public class Bouncer implements Serializable {
     public void setCurrentTravel(int currentTravel) {
         this.currentTravel = currentTravel;
     }
+    
+    public int getMvtDirection() { 
+    return mvtDirection; 
+    }
+    public void setMvtDirection(int mvtDirection) { 
+        this.mvtDirection = mvtDirection; 
+    }
+
+    public int getDirChangeCount() { 
+        return dirChangeCount; 
+    }
+    public void setDirChangeCount(int dirChangeCount) { 
+        this.dirChangeCount = dirChangeCount; 
+    }
+
 
     @Override
     public int hashCode() {
