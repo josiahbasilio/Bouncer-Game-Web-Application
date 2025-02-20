@@ -8,6 +8,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -21,13 +24,94 @@ public class Bouncer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
+    // Size of the Bouncer (in pixels)
+    private int size; 
+    
+    // Position on the grid
+    @NotNull
+    @Min(0) @Max(800) // X_LIMIT
+    private Integer x;
 
+    @NotNull
+    @Min(0) @Max(600) // Y_LIMIT
+    private Integer y;
+    
+    // Maximum travel distance
+    private int maxTravel;
+    
+    // Current movement offset from its original position
+    private int currentTravel = 0;
+    
+    // Direction of movement (1 = right, -1 = left)
+    private int mvtDirection = 1;
+
+    // Tracks how many times direction has changed
+    private int dirChangeCount = 0;
+    
+    // Constants
+    public static final int INITIAL_SIZE = 30;  // Default size
+    public static final int TRAVEL_SPEED = 2;   // Speed of movement
+    public static final int MAX_DIR_CHANGES = 10; // Max times direction can change before shrinking
+    public static final int DECREASE_RATE = 1;  // How much maxTravel decreases after MAX_DIR_CHANGES
+    
+     /**
+     * Default constructor initializing Bouncer with default values.
+     */
+    public Bouncer() {
+        this.size = INITIAL_SIZE;
+        this.maxTravel = INITIAL_SIZE;
+    }
+    
+    public Bouncer(Integer x, Integer y, int size, int maxTravel) {
+        this.x = x;
+        this.y = y;
+        this.size = size;
+        this.maxTravel = maxTravel;
+    }
+    
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+    
+    public Integer getX() { 
+        return x; 
+    }
+    
+    public void setX(Integer x) {
+        this.x = x; 
+    }
+
+    public Integer getY() { 
+        return y; 
+    }
+    
+    public void setY(Integer y) { 
+        this.y = y; 
+    }
+
+    public int getSize() { 
+        return size; 
+    }
+    
+    public void setSize(int size) { 
+        this.size = size; 
+    }
+
+    public int getMaxTravel() { 
+        return maxTravel; 
+    }
+    
+    public void setMaxTravel(int maxTravel) { 
+        this.maxTravel = maxTravel; 
+    }
+
+    public int getCurrentTravel() { 
+        return currentTravel; 
     }
 
     @Override
