@@ -131,6 +131,10 @@ public class Bouncer implements Serializable {
     public int getCurrentTravel() { 
         return currentTravel; 
     }
+    
+    public void setCurrentTravel(int currentTravel) {
+        this.currentTravel = currentTravel;
+    }
 
     @Override
     public int hashCode() {
