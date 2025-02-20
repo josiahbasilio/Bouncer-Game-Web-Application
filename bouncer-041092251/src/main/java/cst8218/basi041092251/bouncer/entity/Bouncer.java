@@ -70,6 +70,24 @@ public class Bouncer implements Serializable {
         this.maxTravel = maxTravel;
     }
     
+    /**
+    * Updates the properties to simulate the passing of one unit of time.
+    */
+    public void timeStep() {
+        if (maxTravel > 0){ // If Bouncer can still move.
+            currentTravel += mvtDirection * TRAVEL_SPEED; // Move in the current direction.
+            if (Math.abs(currentTravel) >= maxTravel){ // If the Bouncer reaches the max distance, reverse direction.
+                mvtDirection = -mvtDirection; // Reverse direction.
+                dirChangeCount++; // Increase direction change counter.
+                if (dirChangeCount > MAX_DIR_CHANGES){  // If it changes direction too many times, shrink the maxTravel distance.
+                    maxTravel -= DECREASE_RATE; // Reduce maxTravel.
+                    dirChangeCount = 0;         // Reset direction change count.
+                }
+            }
+        }
+    }
+    
+    // Getters and Setters
     public Long getId() {
         return id;
     }
