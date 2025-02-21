@@ -87,29 +87,30 @@ public class Bouncer implements Serializable {
         }
     }
     
-    public void updateFrom(Bouncer newBouncer) {
+    public void updateFromNonNull(Bouncer newBouncer) {
         if (newBouncer.getX() != null) {
-            this.x = newBouncer.getX();
+            this.setX(newBouncer.getX());
         }
         if (newBouncer.getY() != null) {
-            this.y = newBouncer.getY();
+            this.setY(newBouncer.getY());
         }
         if (newBouncer.getSize() > 0) { 
-            this.size = newBouncer.getSize();
+            this.setSize(newBouncer.getSize());
         }
         if (newBouncer.getMaxTravel() > 0) { 
-            this.maxTravel = newBouncer.getMaxTravel();
+            this.setMaxTravel(newBouncer.getMaxTravel());
         }
         if (newBouncer.getCurrentTravel() != 0) { 
-            this.currentTravel = newBouncer.getCurrentTravel();
+            this.setCurrentTravel(newBouncer.getCurrentTravel());
         }
         if (newBouncer.getMvtDirection() != 0) { 
-            this.mvtDirection = newBouncer.getMvtDirection();
+            this.setMvtDirection(newBouncer.getMvtDirection());
         }
         if (newBouncer.getDirChangeCount() >= 0) { 
-            this.dirChangeCount = newBouncer.getDirChangeCount();
+            this.setDirChangeCount(newBouncer.getDirChangeCount());
         }
     }
+
     
     // Getters and Setters
     public Long getId() {

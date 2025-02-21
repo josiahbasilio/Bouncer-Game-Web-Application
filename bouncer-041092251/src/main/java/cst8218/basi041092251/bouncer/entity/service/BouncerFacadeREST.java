@@ -52,9 +52,9 @@ public class BouncerFacadeREST extends AbstractFacade<Bouncer> {
             // Updating an existing Bouncer
             Bouncer existingBouncer = super.find(newBouncer.getId());
             if (existingBouncer != null) {
-                existingBouncer.updateFrom(newBouncer);
+                existingBouncer.updateFromNonNull(newBouncer); // Preserve old values
                 super.edit(existingBouncer);
-                return Response.ok(existingBouncer).build(); // 200 OK
+                return Response.ok(existingBouncer).build();
             } else {
                 return Response.status(Response.Status.BAD_REQUEST)
                         .entity("Bouncer with ID " + newBouncer.getId() + " does not exist.")
@@ -63,6 +63,7 @@ public class BouncerFacadeREST extends AbstractFacade<Bouncer> {
         }
     }
 
+
 //    @POST
 //    @Override
 //    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -70,35 +71,37 @@ public class BouncerFacadeREST extends AbstractFacade<Bouncer> {
 //        super.create(entity);
 //    }
     
-   @POST
-    @Path("{id}")
-    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Response replaceBouncer(@PathParam("id") Long id, Bouncer newBouncer) {
-        Bouncer existingBouncer = super.find(id);
-        if (existingBouncer == null) {
-            return Response.status(Response.Status.BAD_REQUEST)
-                    .entity("Bouncer with ID " + id + " not found.")
-                    .build();
-        }
+    @POST
+@Path("{id}")
+@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+public Response replaceBouncer(@PathParam("id") Long id, Bouncer newBouncer) {
+    Bouncer existingBouncer = super.find(id);
+    if (existingBouncer == null) {
+        return Response.status(Response.Status.BAD_REQUEST)
+                .entity("Bouncer with ID " + id + " not found.")
+                .build();
+    }
 
-        if (newBouncer.getId() != null && !newBouncer.getId().equals(id)) {
-            return Response.status(Response.Status.BAD_REQUEST)
-                    .entity("Mismatched ID in body and URL.")
-                    .build();
-        }
+    if (newBouncer.getId() != null && !newBouncer.getId().equals(id)) {
+        return Response.status(Response.Status.BAD_REQUEST)
+                .entity("Mismatched ID in body and URL.")
+                .build();
+    }
 
-        if (newBouncer.getX() == null || newBouncer.getY() == null) {
-            return Response.status(Response.Status.BAD_REQUEST)
-                    .entity("X and Y positions cannot be null.")
-                    .build();
-        }
+    // Ensure mandatory values are provided
+    if (newBouncer.getX() == null || newBouncer.getY() == null) {
+        return Response.status(Response.Status.BAD_REQUEST)
+                .entity("X and Y positions cannot be null.")
+                .build();
+    }
+    
+    newBouncer.setId(id);
+    super.edit(newBouncer);
 
-        newBouncer.setId(id);  
-        super.edit(newBouncer);  
-
-        return Response.ok(newBouncer).build(); 
-    } 
+    return Response.ok(newBouncer).build();
+}
+ 
 
 //    @PUT
 //    @Path("{id}")
@@ -125,11 +128,13 @@ public class BouncerFacadeREST extends AbstractFacade<Bouncer> {
                     .build();
         }
 
-        existingBouncer.updateFrom(newBouncer);
-        super.edit(existingBouncer); // Save to database
+        // Update only non-null fields, preserving old values
+        existingBouncer.updateFromNonNull(newBouncer);
+        super.edit(existingBouncer);
 
-        return Response.ok(existingBouncer).build(); // 200 OK
+        return Response.ok(existingBouncer).build();
     }
+
     
     @PUT
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
