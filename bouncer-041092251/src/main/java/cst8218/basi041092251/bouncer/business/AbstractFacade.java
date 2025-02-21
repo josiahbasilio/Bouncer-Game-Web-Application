@@ -19,12 +19,17 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 
 /**
- *
- * @author ian
+ * This abstract class the other entity-specific facades (like BouncerFacade)
+ * can inherit these database methods without rewriting them, making the code 
+ * more reusable and organized.
  */
 public abstract class AbstractFacade<T> {
     private Class<T> entityClass;
 
+     /**
+     * Constructor to initialize the entity type that this facade will manage.
+     * @param entityClass The class type of the entity (e.g., Bouncer.class)
+     */
     public AbstractFacade(Class<T> entityClass) {
         this.entityClass = entityClass;
     }

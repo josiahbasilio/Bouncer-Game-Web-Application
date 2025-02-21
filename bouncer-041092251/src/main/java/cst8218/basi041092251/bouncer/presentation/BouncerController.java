@@ -1,3 +1,9 @@
+/*
+ * This class acts as the controller for managing Bouncer entities within the JSF.
+ * It handles user interactions including creating, updating, viewing, and deleting Bouncers.
+ * 
+ * This controller maintains session state @SessionScoped, meaning the same instance is used throughout a user’s session.
+ */
 package cst8218.basi041092251.bouncer.presentation;
 
 import cst8218.basi041092251.bouncer.entity.Bouncer;
@@ -39,6 +45,11 @@ public class BouncerController implements Serializable {
     public BouncerController() {
     }
 
+    /**
+     * Retrieves the currently selected Bouncer. If no Bouncer is selected, a new one is created.
+     * 
+     * @return The currently selected Bouncer.
+     */
     public Bouncer getSelected() {
         if (current == null) {
             current = new Bouncer();
@@ -47,6 +58,11 @@ public class BouncerController implements Serializable {
         return current;
     }
 
+     /**
+     * Initializes and returns the JPA controller responsible for database operations.
+     * 
+     * @return The Bouncer JPA controller.
+     */
     private BouncerJpaController getJpaController() {
         if (jpaController == null) {
             jpaController = new BouncerJpaController(utx, emf);
@@ -54,6 +70,11 @@ public class BouncerController implements Serializable {
         return jpaController;
     }
 
+    /**
+     * Provides pagination support for displaying Bouncer records.
+     * 
+     * @return The PaginationHelper instance.
+     */
     public PaginationHelper getPagination() {
         if (pagination == null) {
             pagination = new PaginationHelper(10) {

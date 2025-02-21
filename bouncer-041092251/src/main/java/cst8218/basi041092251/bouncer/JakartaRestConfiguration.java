@@ -4,9 +4,11 @@ import jakarta.ws.rs.ApplicationPath;
 import jakarta.ws.rs.core.Application;
 
 /**
- * Configures Jakarta RESTful Web Services for the application.
- * @author Juneau
+ * This class is responsible for configuring Jakarta RESTful Web Services (JAX-RS)
+ * for the application. It defines the base path for all REST API endpoints
  */
+
+// Initialize the RESTful API configuration
 @ApplicationPath("resources")
 public class JakartaRestConfiguration extends Application {
     
