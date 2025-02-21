@@ -258,7 +258,10 @@ public Response replaceBouncer(@PathParam("id") Long id, Bouncer newBouncer) {
         int count = super.count();
         return Response.ok(count).build();
     }
-    
+
+/*
+ * These were generated once BouncerFacadeRest was created
+ */
 //    @DELETE
 //    @Path("{id}")
 //    public void remove(@PathParam("id") Long id) {

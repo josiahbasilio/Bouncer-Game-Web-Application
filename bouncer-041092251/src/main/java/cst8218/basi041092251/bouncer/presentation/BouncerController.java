@@ -93,23 +93,39 @@ public class BouncerController implements Serializable {
         return pagination;
     }
 
+     /**
+     * Navigates to the Bouncer list page.
+     * 
+     * @return The name of the list view.
+     */
     public String prepareList() {
         recreateModel();
         return "List";
     }
 
+    /**
+     * Prepares to view a selected Bouncer.
+     * 
+     * @return The name of the view page.
+     */
     public String prepareView() {
         current = (Bouncer) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
+    
     public String prepareCreate() {
         current = new Bouncer();
         selectedItemIndex = -1;
         return "Create";
     }
 
+     /**
+     * Prepares to create a new Bouncer.
+     * 
+     * @return The name of the create page.
+     */
     public String create() {
         try {
             getJpaController().create(current);
@@ -121,12 +137,22 @@ public class BouncerController implements Serializable {
         }
     }
 
+    /**
+     * Prepares to edit an existing Bouncer.
+     * 
+     * @return The name of the edit page.
+     */
     public String prepareEdit() {
         current = (Bouncer) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
 
+    /**
+     * Updates an existing Bouncer in the database.
+     * 
+     * @return Redirects to the view page if successful, otherwise returns null.
+     */
     public String update() {
         try {
             getJpaController().edit(current);
@@ -138,6 +164,11 @@ public class BouncerController implements Serializable {
         }
     }
 
+     /**
+     * Deletes the selected Bouncer.
+     * 
+     * @return Redirects to the list page.
+     */
     public String destroy() {
         current = (Bouncer) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
@@ -160,6 +191,7 @@ public class BouncerController implements Serializable {
         }
     }
 
+    // Delete a Bouncer and refresh the list.
     private void performDestroy() {
         try {
             getJpaController().destroy(current.getId());
@@ -184,6 +216,11 @@ public class BouncerController implements Serializable {
         }
     }
 
+    /**
+     * Returns the paginated data model containing Bouncers.
+     * 
+     * @return A DataModel containing Bouncer objects.
+     */
     public DataModel getItems() {
         if (items == null) {
             items = getPagination().createPageDataModel();

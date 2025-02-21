@@ -207,6 +207,10 @@ public class BouncerJpaController implements Serializable {
         }
     }
 
+     /**
+     * Counts the total number of Bouncers in the database.
+     * @return The total count of Bouncer records.
+     */
     public int getBouncerCount() {
         EntityManager em = getEntityManager();
         try {
