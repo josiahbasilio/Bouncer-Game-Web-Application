@@ -81,7 +81,7 @@ public class BouncerFacadeREST extends AbstractFacade<Bouncer> {
             // Updating an existing Bouncer
             Bouncer existingBouncer = super.find(newBouncer.getId());
             if (existingBouncer != null) {
-                existingBouncer.updateFromNonNull(newBouncer); // Preserve old values
+                existingBouncer.updateFromNonNull(newBouncer); // Non-null values overwrite existing Boucer's values
                 super.edit(existingBouncer);
                 return Response.ok(existingBouncer).build();
             } else {

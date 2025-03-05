@@ -17,13 +17,13 @@ import java.util.List;
  *
  * @author basil
  */
-@Singleton
-@Startup
+@Singleton  // one instance
+@Startup    // initializes immediately after deployment 
 public class BouncerGame {
-    @Inject
+    @Inject // inject instance, responsible for CRUD operation on Boucer entities.
     private BouncerFacade bouncerFacade;  // Injects BouncerFacade to manage database
     
-    private static final int CHANGE_RATE = 60;  // Updates per second
+    private static final int CHANGE_RATE = 60;  // Updates per second, 60FPS in games.
     private static final long SLEEP_TIME = (long) (1000.0 / CHANGE_RATE);  // Convert to milliseconds
     
     /**
