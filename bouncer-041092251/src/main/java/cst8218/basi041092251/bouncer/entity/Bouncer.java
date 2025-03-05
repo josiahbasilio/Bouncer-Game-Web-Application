@@ -35,11 +35,11 @@ public class Bouncer implements Serializable {
     private int size; 
     
     // Position on the grid
-    @NotNull
+    
     @Min(0) @Max(900) // X-coordinate boundaries
     private Integer x;
 
-    @NotNull
+    
     @Min(0) @Max(600) // Y-coordinate boundaries
     private Integer y;
     
