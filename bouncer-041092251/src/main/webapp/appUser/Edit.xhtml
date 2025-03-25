@@ -15,8 +15,6 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.EditAppUserLabel_id}" for="id" />
-                    <h:inputText id="id" value="#{appUserController.selected.id}" title="#{bundle.EditAppUserTitle_id}" />
                     <h:outputLabel value="#{bundle.EditAppUserLabel_userid}" for="userid" />
                     <h:inputText id="userid" value="#{appUserController.selected.userid}" title="#{bundle.EditAppUserTitle_userid}" required="true" requiredMessage="#{bundle.EditAppUserRequiredMessage_userid}"/>
                     <h:outputLabel value="#{bundle.EditAppUserLabel_password}" for="password" />
