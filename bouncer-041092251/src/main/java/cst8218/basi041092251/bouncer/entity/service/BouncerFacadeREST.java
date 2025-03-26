@@ -16,6 +16,8 @@
 package cst8218.basi041092251.bouncer.entity.service;
 
 import cst8218.basi041092251.bouncer.entity.Bouncer;
+import jakarta.annotation.security.DeclareRoles;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -35,6 +37,8 @@ import java.util.List;
  *
  * @author basil
  */
+@DeclareRoles({"Admin", "RestGroup"})
+@RolesAllowed({"Admin", "RestGroup"})
 @Stateless
 @Path("cst8218.basi041092251.bouncer.entity.bouncer")
 public class BouncerFacadeREST extends AbstractFacade<Bouncer> {
