@@ -29,12 +29,9 @@
 			<url-pattern>/faces/bouncer/*</url-pattern>
 		</web-resource-collection>
 		<auth-constraint>
-			<description>Admin Role Required</description>
+			<description>Admin or JsfGroup Role Required</description>
 			<role-name>Admin</role-name>
-		</auth-constraint>
-		<!--<auth-constraint>
-			<description>JsfGroup Role Required</description>
 			<role-name>JsfGroup</role-name>
-		</auth-constraint>-->
+		</auth-constraint>
 	</security-constraint>
 </web-app>
