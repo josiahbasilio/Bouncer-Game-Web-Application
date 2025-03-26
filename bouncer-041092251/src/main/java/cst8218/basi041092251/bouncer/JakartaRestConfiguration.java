@@ -16,11 +16,13 @@ import jakarta.ws.rs.core.Application;
 
 // Initialize the RESTful API configuration.
 @BasicAuthenticationMechanismDefinition
+/*
 @FormAuthenticationMechanismDefinition(
 	loginToContinue = @LoginToContinue(
 	loginPage = "/index.xhtml",
 	errorPage = "/index.xhtml")
 )
+*/
 @DatabaseIdentityStoreDefinition(
 	dataSourceLookup = "${'java:app/MariaDB'}",
 	callerQuery = "#{'select password from appuser where userid = ?'}",
