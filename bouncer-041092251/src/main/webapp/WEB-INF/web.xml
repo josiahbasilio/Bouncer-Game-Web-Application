@@ -32,9 +32,9 @@
 			<description>Admin Role Required</description>
 			<role-name>Admin</role-name>
 		</auth-constraint>
-		<auth-constraint>
+		<!--<auth-constraint>
 			<description>JsfGroup Role Required</description>
 			<role-name>JsfGroup</role-name>
-		</auth-constraint>
+		</auth-constraint>-->
 	</security-constraint>
 </web-app>
