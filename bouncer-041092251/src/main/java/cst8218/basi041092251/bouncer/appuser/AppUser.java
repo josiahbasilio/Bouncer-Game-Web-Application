@@ -38,11 +38,11 @@ import jakarta.validation.constraints.Pattern;
 public class AppUser implements Serializable {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Primary key
+    @GeneratedValue(strategy = GenerationType.AUTO) // Primary key
     private Long id;
 
     @NotNull
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String userid;
 
     @NotNull
@@ -254,7 +254,7 @@ public class AppUser implements Serializable {
 
     @Override
     public String toString() {
-        return "cst8218.basi0036.appuser.AppUser[id=" + id + ", userid=" + userid + "]";
+        return "cst8218.basi041092251.bouncer.appuser.AppUser[ id=" + id + " ]";
     }
 
 }

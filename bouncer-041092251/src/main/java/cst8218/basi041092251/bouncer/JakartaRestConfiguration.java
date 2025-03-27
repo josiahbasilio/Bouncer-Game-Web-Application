@@ -15,14 +15,13 @@ import jakarta.ws.rs.ApplicationPath;
 import jakarta.ws.rs.core.Application;
 
 // Initialize the RESTful API configuration.
+// Form Authentication annotaion. DO NOT REMOVE.
+//@FormAuthenticationMechanismDefinition(
+//	loginToContinue = @LoginToContinue(
+//	loginPage = "/index.xhtml",
+//	errorPage = "/index.xhtml")
+//)
 @BasicAuthenticationMechanismDefinition
-/*
-@FormAuthenticationMechanismDefinition(
-	loginToContinue = @LoginToContinue(
-	loginPage = "/index.xhtml",
-	errorPage = "/index.xhtml")
-)
-*/
 @DatabaseIdentityStoreDefinition(
 	dataSourceLookup = "${'java:app/MariaDB'}",
 	callerQuery = "#{'select password from appuser where userid = ?'}",

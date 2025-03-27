@@ -45,9 +45,12 @@ td {
     vertical-align: top;
     padding-bottom: 8px;
     font-size: small;
+	align-content: center;
 }
 
 form.jsfcrud_list_form td, td td {
+	width:0.1%;
+	white-space: nowrap;
     border-top-style: solid;
     border-bottom-style: solid;
     border-left-style: solid;
