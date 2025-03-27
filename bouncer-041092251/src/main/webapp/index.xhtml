@@ -3,31 +3,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Home</title>
         <h:outputStylesheet name="css/jsfcrud.css"/>
     </h:head>
     <h:body>
-        Hello from Facelets
-        <br />
+        <h1>Welcome to Bouncer</h1>
         <h:link outcome="/bouncer/List" value="Show All Bouncer Items"/>
         <br />
         <h:link outcome="/appUser/List" value="Show All AppUser Items"/>
-<!--	Form Authentication form. DO NOT REMOVE.
 		<br />
-		<form action="j_security_check" method="POST">
-			<p>Authorization required to access sites.</p>
-			<table>
-				<tr>
-					<td><label for="username">Username</label></td>
-					<td><input name="j_username" type="text"/></td>
-				</tr>
-				<tr>
-					<td><label for="password">Password</label></td>
-					<td><input name="j_password" type="password"/></td>
-				</tr>
-				<tr><td><input type="submit"/></td></tr>
-			</table>
-		</form>-->
+		<p>Note: Authorization is required to access sites.</p>
     </h:body>
 
 </html>
