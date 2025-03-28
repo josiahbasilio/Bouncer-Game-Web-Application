@@ -44,8 +44,7 @@
             // Draw bouncers on canvas
             useEffect(() => {
               const ctx = canvasRef.current.getContext("2d");
-              ctx.clearRect(0, 0, canvasRef.current.width,
-              canvasRef.current.height);
+              ctx.clearRect(0, 0, canvasRef.current.width,canvasRef.current.height);
               ctx.fillStyle = "#0000FF";
               bouncers.forEach(b => {
                 ctx.fillRect(b.x, b.y, b.size, b.size);
@@ -64,7 +63,7 @@
                 e.preventDefault(); // prevent page reload
 
                 let newItem;
-                bouncers.map((item, index) => {
+                bouncers.map((bouncer, index) => {
                   if (index === selected.index) {
                     newItem = Object.assign({}, bouncer, { [selected.field]: selected.value });
 
