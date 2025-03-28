@@ -30,9 +30,7 @@
                 const res = await fetch("http://localhost:8080/bouncer-041092251/resources/cst8218.basi041092251.bouncer.entity.bouncer", {
                   headers: {
                     'Accept': 'application/json',
-                    'Authorization': 'Basic ' + btoa('josiah:josiahbasilio'), // admin:adminpassword
-                    'Cache-Control': 'no-cache' // prevent caching
-
+                    'Authorization': 'Basic ' + btoa('josiah:josiahbasilio') // admin:adminpassword
                   }
                 });
                 const data = await res.json();
