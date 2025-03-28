@@ -92,6 +92,7 @@ public class Bouncer implements Serializable {
     public void timeStep() {
         if (maxTravel > 0){ // If Bouncer can still move.
             currentTravel += mvtDirection * TRAVEL_SPEED; // Move in the current direction.
+            x += mvtDirection * TRAVEL_SPEED; // Moves the Bouncer
             if (Math.abs(currentTravel) >= maxTravel){ // If the Bouncer reaches the max distance, reverse direction.
                 mvtDirection = -mvtDirection; // Reverse direction.
                 dirChangeCount++; // Increase direction change counter.
