@@ -23,9 +23,8 @@ public class BouncerGame {
     @Inject // inject instance, responsible for CRUD operation on Boucer entities.
     private BouncerFacade bouncerFacade;  // Injects BouncerFacade to manage database
     
-	private List<Bouncer> bouncers;
     private static final int CHANGE_RATE = 60;  // Updates per second, 60FPS in games.
-    private static final long SLEEP_TIME = ((long) (1.0 / CHANGE_RATE * 1000));  // Convert to milliseconds
+    private static final long SLEEP_TIME = (long) (1000 / CHANGE_RATE);  // Convert to milliseconds
     
     /**
      * Starts the game loop after deployment.
@@ -52,7 +51,7 @@ public class BouncerGame {
      * and saves changes back to the database.
      */
     private void updateBouncers() {
-        bouncers = bouncerFacade.findAll();
+        List<Bouncer> bouncers = bouncerFacade.findAll();
         for (Bouncer bouncer : bouncers) {
             bouncer.timeStep();  // Update Bouncer movement
             bouncerFacade.edit(bouncer);  // Save changes to database
