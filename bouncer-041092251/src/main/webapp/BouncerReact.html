@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" /> <title>Hello World</title>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script async src="https://ga.jspm.io/npm:es-module-shims@1.7.0/dist/es-module-shims.js"></script>
+<script type="importmap">
+{
+"imports": {
+"react": "https://esm.sh/react?dev",
+"react-dom/client": "https://esm.sh/react-dom/client?dev"
+}
+}
+</script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel" data-type="module" >
+    import React, { useEffect, useState, StrictMode, useRef } from 'react';
+    import { createRoot } from 'react-dom/client';
+        function App() {
+            const canvasRef = useRef(null);
+            const [bouncers, setBouncers] = useState([]);
+            const [selected, setSelected] = useState({});
+            
+            // Fetch Bouncers every 300ms
+            useEffect(() => {
+              async function fetchBouncers() {
+                const res = await fetch("http://localhost:8080/bouncer-041092251/resources/cst8218.basi041092251.bouncer.entity.bouncer", {
+                  headers: {
+                    'Accept': 'application/json',
+                    'Authorization': 'Basic ' + btoa('josiah:josiahbasilio') // admin:adminpassword
+                  }
+                });
+                const data = await res.json();
+                setBouncers(data);
+              }
+
+              const interval = setInterval(fetchBouncers, 300);
+              return () => clearInterval(interval);
+            }, []);
+        
+            // Draw bouncers on canvas
+            useEffect(() => {
+              const ctx = canvasRef.current.getContext("2d");
+              ctx.clearRect(0, 0, canvasRef.current.width,canvasRef.current.height);
+              ctx.fillStyle = "#0000FF";
+              bouncers.forEach(b => {
+                ctx.fillRect(b.x, b.y, b.size, b.size);
+              });
+            }, [bouncers]);
+
+            const handleClick = (e, field, index) => {
+              setSelected({ index, field, value: e.target.value });
+            };
+
+            const handleChange = (e, field, index) => {
+              setSelected({ index, field: selected.field, value: e.target.value });
+            };
+            
+            const handleSubmit = (e) => {
+                e.preventDefault(); // prevent page reload
+
+                let newItem;
+                bouncers.map((bouncer, index) => {
+                  if (index === selected.index) {
+                    newItem = Object.assign({}, bouncer, { [selected.field]: selected.value });
+
+                    fetch("http://localhost:8080/bouncer-041092251/resources/cst8218.basi041092251.bouncer.entity.bouncer/" + bouncer.id, {
+                      method: 'PUT',
+                      body: JSON.stringify(newItem),
+                      headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Basic ' + btoa('josiah:josiahbasilio') // Replace with actual credentials
+                      }
+                    }).then(res => res.text());
+
+                    setSelected({}); // reset selected field
+                  }
+                });
+            };
+            
+            // onSubmit 
+            return (
+        <div>
+          <form onSubmit={handleSubmit}>
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>X</th>
+                  <th>Y</th>
+                  <th>Size</th>
+                  {selected.field && <th>New {selected.field}</th>}
+                </tr>
+              </thead>
+              <tbody>
+                {bouncers.map((b, i) => (
+                  <tr key={b.id}>
+                    <td>{b.id}</td>
+                    <td><input type="text" value={b.x} onClick={(e) => handleClick(e, "x", i)} onChange={(e) => handleChange(e, "x", i)} /></td>
+                    <td><input type="text" value={b.y} onClick={(e) => handleClick(e, "y", i)} onChange={(e) => handleChange(e, "y", i)} /></td>
+                    <td><input type="text" value={b.size} onClick={(e) => handleClick(e, "size", i)} onChange={(e) => handleChange(e, "size", i)} /></td>
+                    {selected.index === i &&
+                      <td><input type="text" value={selected.value} onChange={(e) => handleChange(e, selected.field, i)} autoFocus /></td>
+                    }
+                  </tr>
+                ))}
+                {selected.index != null &&
+                  <tr><td colSpan="5"><input type="submit" value="Submit Change" /></td></tr>
+                }
+              </tbody>
+            </table>
+          </form>
+
+          <canvas ref={canvasRef} width={500} height={500} style={{ border: '1px solid #333', marginTop: '20px' }}></canvas>
+        </div>
+      );
+       // onSubmit
+
+        
+        } 
+        // function App()
+        
+        const container = document.getElementById('root');
+        const root = createRoot(container);
+        root.render(<App />);
+        </script>
+</body>
+</html>
