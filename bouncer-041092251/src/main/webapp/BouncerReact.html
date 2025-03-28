@@ -30,7 +30,9 @@
                 const res = await fetch("http://localhost:8080/bouncer-041092251/resources/cst8218.basi041092251.bouncer.entity.bouncer", {
                   headers: {
                     'Accept': 'application/json',
-                    'Authorization': 'Basic ' + btoa('josiah:josiahbasilio') // admin:adminpassword
+                    'Authorization': 'Basic ' + btoa('josiah:josiahbasilio'), // admin:adminpassword
+                    'Cache-Control': 'no-cache' // prevent caching
+
                   }
                 });
                 const data = await res.json();
@@ -114,7 +116,7 @@
             </table>
           </form>
 
-          <canvas ref={canvasRef} width={500} height={500} style={{ border: '1px solid #333', marginTop: '20px' }}></canvas>
+          <canvas ref={canvasRef} width={1000} height={600} style={{ border: '1px solid #333', marginTop: '20px' }}></canvas>
         </div>
       );
        // onSubmit
