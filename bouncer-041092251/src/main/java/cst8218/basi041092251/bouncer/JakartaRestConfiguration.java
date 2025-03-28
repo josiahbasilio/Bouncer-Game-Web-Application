@@ -14,8 +14,8 @@ import jakarta.security.enterprise.identitystore.Pbkdf2PasswordHash;
 import jakarta.ws.rs.ApplicationPath;
 import jakarta.ws.rs.core.Application;
 
- // Initialize the RESTful API configuration.
- // Form Authentication annotaion. DO NOT REMOVE.
+// Initialize the RESTful API configuration.
+// Form Authentication annotaion. DO NOT REMOVE.
 //@FormAuthenticationMechanismDefinition(
 //	loginToContinue = @LoginToContinue(
 //	loginPage = "/Login.xhtml",
