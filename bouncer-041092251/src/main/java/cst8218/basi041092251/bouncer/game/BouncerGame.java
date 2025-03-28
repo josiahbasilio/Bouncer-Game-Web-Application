@@ -24,7 +24,7 @@ public class BouncerGame {
     private BouncerFacade bouncerFacade;  // Injects BouncerFacade to manage database
     
     private static final int CHANGE_RATE = 60;  // Updates per second, 60FPS in games.
-    private static final long SLEEP_TIME = (long) (1000.0 / CHANGE_RATE);  // Convert to milliseconds
+    private static final long SLEEP_TIME = (long) (1000 / CHANGE_RATE);  // Convert to milliseconds
     
     /**
      * Starts the game loop after deployment.
