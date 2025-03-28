@@ -18,8 +18,8 @@ import jakarta.ws.rs.core.Application;
 // Form Authentication annotaion. DO NOT REMOVE.
 //@FormAuthenticationMechanismDefinition(
 //	loginToContinue = @LoginToContinue(
-//	loginPage = "/index.xhtml",
-//	errorPage = "/index.xhtml")
+//	loginPage = "/Login.xhtml",
+//	errorPage = "/Login.xhtml")
 //)
 @BasicAuthenticationMechanismDefinition
 @DatabaseIdentityStoreDefinition(

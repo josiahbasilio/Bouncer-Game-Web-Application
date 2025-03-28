@@ -10,6 +10,7 @@ import cst8218.basi041092251.bouncer.entity.Bouncer;
 import cst8218.basi041092251.bouncer.presentation.util.JsfUtil;
 import cst8218.basi041092251.bouncer.presentation.util.PaginationHelper;
 import cst8218.basi041092251.bouncer.business.BouncerJpaController;
+import jakarta.annotation.PostConstruct;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -26,6 +27,7 @@ import jakarta.faces.model.SelectItem;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.PersistenceUnit;
 import jakarta.transaction.UserTransaction;
+import java.util.Locale;
 
 @Named("bouncerController")
 @SessionScoped
@@ -41,9 +43,43 @@ public class BouncerController implements Serializable {
     private BouncerJpaController jpaController = null;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+	private Locale locale;
 
     public BouncerController() {
     }
+	
+	@PostConstruct
+	/**
+	 * Sets the locale of the client.
+	 */
+	public void init() {
+		locale = FacesContext.getCurrentInstance().getExternalContext().getRequestLocale();
+	}
+	
+	/**
+	 * Gets the locale of the client.
+	 * @return locale
+	 */
+	public Locale getLocale() {
+		return locale;
+	}
+	
+	/**
+	 * Gets the language of the client.
+	 * @return locale.getLanguage();
+	 */
+	public String getLanguage() {
+		return locale.getLanguage();
+	}
+	
+	/**
+	 * Sets the language of the client.
+	 * @param language 
+	 */
+	public void setLanguage(String language) {
+		locale = new Locale(language);
+		FacesContext.getCurrentInstance().getViewRoot().setLocale(locale);
+	}
 
     /**
      * Retrieves the currently selected Bouncer. If no Bouncer is selected, a new one is created.
