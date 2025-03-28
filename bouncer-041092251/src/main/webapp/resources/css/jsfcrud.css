@@ -6,11 +6,15 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     color: #3a4f54;
     background-color: #dfecf1;
-    font-size: small;
+    font-size: 0.9em;
 }
 
 a {
     color: #e33b06;
+}
+
+h1 {
+	text-align: center;
 }
 
 table {
@@ -45,9 +49,12 @@ td {
     vertical-align: top;
     padding-bottom: 8px;
     font-size: small;
+	align-content: center;
 }
 
 form.jsfcrud_list_form td, td td {
+	width:0.1%;
+	white-space: nowrap;
     border-top-style: solid;
     border-bottom-style: solid;
     border-left-style: solid;
