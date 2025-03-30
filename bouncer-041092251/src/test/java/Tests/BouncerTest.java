@@ -29,7 +29,7 @@ public class BouncerTest {
         bouncer = new Bouncer();
         bouncer.setX(100);
         bouncer.setY(50);
-        bouncer.setMaxTravel(10);
+        bouncer.setMaxTravel(90);
         bouncer.setMvtDirection(1);
         bouncer.setCurrentTravel(10);
     }
@@ -56,6 +56,7 @@ public class BouncerTest {
     @Test
     @DisplayName("Bouncer should shrink maxTravel after 11 direction changes")
     public void testMaxTravelDecreasesAfterDirectionChanges() {
+    bouncer.setMaxTravel(10);
     int originalMaxTravel = bouncer.getMaxTravel();
 
     for (int i = 0; i < 200; i++) {
@@ -63,9 +64,16 @@ public class BouncerTest {
     }
 
     assertTrue(bouncer.getMaxTravel() < originalMaxTravel, "maxTravel should decrease after too many direction changes");
-}
+    }
     
-    
+    @Test
+    @DisplayName("Bouncer's current travel should increase by 50.")
+    public void testMultipleDirectionMovement() {
+        for (int i = 0; i < 25; i++) {
+            bouncer.timeStep();
+        }
+        assertEquals(150, bouncer.getX(), "X should increase by 50.");
+    }
     
 
     
