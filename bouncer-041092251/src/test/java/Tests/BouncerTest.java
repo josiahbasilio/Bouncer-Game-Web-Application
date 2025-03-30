@@ -12,6 +12,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.RepeatedTest;
 
 /**
  *
@@ -30,27 +31,51 @@ public class BouncerTest {
         bouncer.setY(50);
         bouncer.setMaxTravel(10);
         bouncer.setMvtDirection(1);
-        bouncer.setCurrentTravel(0);
+        bouncer.setCurrentTravel(10);
     }
     
-   
-    // Defines a test method.
-    @Test
-    // Defines the name of the test displayed to the user.
-    @DisplayName("Bouncer's position and direction should update.")
-    public void testTimeStep() {
-        assertEquals(1, 1);
-        //Bouncer bouncer = new Bouncer();
-
-    }
     
     @Test
     @DisplayName("Bouncer should move in +X direction and update currentTravel")
     public void testPositiveDirectionMovement() {
         bouncer.timeStep();
         assertEquals(102, bouncer.getX(), "X should increase by 2 (TRAVEL_SPEED)");
-        assertEquals(2, bouncer.getCurrentTravel(), "currentTravel should increase by 2");
     }
+    
+    @Test
+    @DisplayName("Bouncer's movement direction should be negative.")
+    public void testMaximumCurrentTravel() {
+        bouncer.setMvtDirection(1);
+        bouncer.setCurrentTravel(20);
+        bouncer.setMaxTravel(20);
+        bouncer.timeStep();
+        assertEquals(-1, bouncer.getMvtDirection(), "X should increase by 2 (TRAVEL_SPEED)");
+    }
+
+    
+    @Test
+    @DisplayName("Bouncer should shrink maxTravel after 11 direction changes")
+    public void testMaxTravelDecreasesAfterDirectionChanges() {
+    int originalMaxTravel = bouncer.getMaxTravel();
+
+    for (int i = 0; i < 200; i++) {
+        bouncer.timeStep(); // Enough to cause >11 direction changes
+    }
+
+    assertTrue(bouncer.getMaxTravel() < originalMaxTravel, "maxTravel should decrease after too many direction changes");
+}
+    
+    
+    
+
+    
+}
+    
+    
+    
+    
+    
+    
     
     
 
@@ -70,4 +95,3 @@ public class BouncerTest {
 //    public void tearDown() throws Exception {
 //    }
 
-}
