@@ -10,19 +10,22 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  *
- * @author matth
+ *
  */
 public class BouncerTest {
 	// Bouncer object.
 	private Bouncer bouncer;
 	
-	  // Runs before each test.
+	// Runs before each test.
     @BeforeEach
+	/**
+	 * Defines and initializes objects and variables used for testing.
+	 */
     public void setUp() {
         // Initialize Bouncer object.
         bouncer = new Bouncer();
@@ -30,51 +33,63 @@ public class BouncerTest {
         bouncer.setY(50);
         bouncer.setMaxTravel(90);
         bouncer.setMvtDirection(1);
-        bouncer.setCurrentTravel(20);
+        bouncer.setCurrentTravel(10);
     }
 	
 	// Defines a test method.
     @Test
 	// Defines the name of the test displayed to the user.
-    @DisplayName("Bouncer should move in +X direction and update currentTravel")
-    public void testPositiveDirectionMovement() {
+    @DisplayName("Bouncer's X property should increase by 2 when timeStep() is called.")
+	/**
+	 * Tests the bouncer's X position when the timeStep() is called.
+	 */
+    public void testIncreaseXOnceWhenTimeStep() {
+		int expectedX = 100 + (1 * 2);
         bouncer.timeStep();
-        assertEquals(102, bouncer.getX(), "X should increase by 2 (TRAVEL_SPEED)");
+		int actualX = bouncer.getX();
+        assertEquals(expectedX, actualX, "X should increase by 2 (TRAVEL_SPEED).");
     }
 	
 	@Test
-    @DisplayName("Bouncer's movement direction should be negative.")
-    public void testMaximumCurrentTravel() {
-		bouncer.setMvtDirection(1);
-		bouncer.setCurrentTravel(20);
+    @DisplayName("Bouncer's mvtDirection should be negative when currentTravel equals maxTravel, "
+					+ "mvtDirection is positive, and timeStep() is called .")
+	/**
+	 * Tests the bouncer's movement direction when its current travel distance is equal to
+	 * its maximum travel distance, its current movement direction is positive, and the 
+	 * timeStep() method is called.
+	 */
+    public void testNegativeMvtDirectionWhenMaximumCurrentTravel() {
+		int expectedMvtDirection = -1;
+		bouncer.setCurrentTravel(19);
 		bouncer.setMaxTravel(20);
         bouncer.timeStep();
-        assertEquals(-1, bouncer.getMvtDirection(), "X should increase by 2 (TRAVEL_SPEED)");
+		int actualMvtDirection = bouncer.getMvtDirection();
+        assertEquals(expectedMvtDirection, actualMvtDirection, "MvtDirection should be negative.");
+    }	
+	
+	@Test
+    @DisplayName("Bouncer's maxTravel should shrink after 11 direction changes.")
+    public void testMaxTravelDecreasesAfterDirectionChanges() {
+		bouncer.setMaxTravel(10);
+		int originalMaxTravel = bouncer.getMaxTravel();
+
+		for (int i = 0; i < 200; i++) {
+			bouncer.timeStep(); // Enough to cause >11 direction changes
+		}
+
+		assertTrue(bouncer.getMaxTravel() < originalMaxTravel, 
+				"maxTravel should decrease after too many direction changes");
     }
 	
 	@Test
-	@DisplayName("Bouncer's current travel should increase by 50.")
-	public void testMultipleDirectionMovement() {
+	@DisplayName("Bouncer's current travel should increase by 50 when timeStep() is called"
+					+ "25 times.")
+	public void testIncreaseXMultipleTimesWhenMultipleTimeStep() {
+		int expectedX = 100 + (1 * 2 * 25);
 		for (int i = 0; i < 25; i++) {
 			bouncer.timeStep();
 		}
-		assertEquals(150, bouncer.getX(), "X should increase by 50.");
+		int actualX = bouncer.getX();
+		assertEquals(expectedX, actualX, "X should increase by 50.");
 	}
-	
-//	@BeforeAll
-//	public static void setUpClass() throws Exception {
-//	}
-//	
-//	@AfterAll
-//	public static void tearDownClass() throws Exception {
-//	}
-//	
-//	@BeforeEach
-//	public void setUp() throws Exception {
-//	}
-//	
-//	@AfterEach
-//	public void tearDown() throws Exception {
-//	}
-	 
 }
