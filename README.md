@@ -37,6 +37,6 @@ This project implements: secure JSF and REST, add an account admin area (AppUser
 - Server: GlassFish
 - APIs: JSF, EJB, JPA, JAX-RS
 - Database: MariaDB (via JDBC DataSource in GlassFish)  
-- Frontend extra page): React, Canvas
+- Frontend: React, Canvas
 - Testing: JUnit, Selenium
 - Tools: Maven, Postman
