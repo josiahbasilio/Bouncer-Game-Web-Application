@@ -4,7 +4,7 @@ An interactive Jakarta EE web app to manage animated Bouncer entities. The syste
 
 ## Assignment Context
 
-This project implements: secure JSF and REST, add an account admin area (AppUsers), internationalize a JSF form, add meaningful tests (JUnit & Selenium), and build a React page that displays/animates Bouncers and allows making changes. Group-size add-ons (Swing/Mobile) depend on team size.
+This project implements: secure JSF and REST, add an account admin area (AppUsers), internationalize a JSF form, add meaningful tests (JUnit & Selenium), and build a React page that displays/animates Bouncers and allows making changes.
 
 ## Features
 
